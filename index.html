@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERIKA</title>
+    <style>
+        @font-face {
+            font-family: 'Vanessa Loves';
+            src: url('vanessalovesyou.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Love Trust';
+            src: url("Love\ &\ Trust.ttf") format('truetype');
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: #f5b8f5;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .top-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #271c81;
+            color: white;
+            text-align: center;
+            transition: opacity 3s ease;
+            opacity: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            align-items: center;
+            display: none;
+            background-color: azure;
+            margin: 5%;
+            margin-left: 20%;
+            margin-right: 20%;
+            border-radius: 20px;
+        }
+
+        .name {
+            font-size: 100px;
+            color: rgb(31, 31, 31);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            letter-spacing: 10px;
+            height: 120px;
+        }
+
+        .letter {
+            transition: font-family 0.3s ease;
+            display: inline-block;
+        }
+
+        img {
+            width: 100px;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        /* Estilo para la sección de la frase */
+        .quote-section {
+            display: none;
+            align-items: center;
+            text-align: center;
+            margin-top: 20px;
+        }
+        #quoteImage {
+            cursor: pointer;
+            width: 800px;
+            height: auto;
+            margin-left: -90px;
+        }
+
+        #texto {
+            margin: 2%;
+            margin-left: 15%;
+            margin-right: 5%;
+            text-align: justify;
+            display: flex;
+            font-size: 18px;
+            font-family: 'Vanessa Loves', Arial, sans-serif;
+        }
+
+        #fotos {
+            display: flex;
+            width: 350px;
+            height: 500px;
+            margin-right: 200px;
+        }
+
+        #contenedor {
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        #imagen3 {
+            margin: 20px;
+            width: 350px;
+            align-items: center;
+            margin-left: 18%;
+        }
+
+        #texto4, #texto5 {
+            font-size: 20px;
+            font-family: 'Love Trust', cursive;
+            margin-left: 15%;
+        }
+
+        #texto3{
+            font-size: 20px;
+            font-family: 'Love Trust', cursive;
+        }
+
+
+        #imagen4 {
+            margin: 20px;
+            width: 350px;
+            align-items: center;
+        }
+
+        #gif {
+            width: 400px;
+        }
+
+        #contenedorgato {
+            background-color: #b9c8fa;
+            margin: 20px;
+            margin-left: 18%;
+            margin-right: 18%;
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        #liston {
+            background-color: rgb(221, 17, 17);
+            height: 30px;
+            width: 20000px;
+        }
+
+        #startButton {
+            margin-top: -50px;
+        }
+
+        #banda {
+            width: 800px;
+            margin-bottom: -100px;
+            margin-top: -70px;
+        }
+
+        #notification {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                max-width: 400px;
+                background-color: rgba(255, 255, 255, 0.9); /* Fondo translúcido */
+                color: black;
+                padding: 10px;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+                margin: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 14px;
+            }
+            #icon{
+                display: flex;
+            }
+
+            #icon img {
+                width: 30px;
+                height: 30px;
+                border-radius: 5px;
+                margin-right: 10px;
+                margin-top: -8px;
+            }
+
+            #content {
+                flex: 1;
+            }
+
+            .title {
+                font-weight: bold;
+                color: #075e54; /* Color verde oscuro similar al de WhatsApp */
+                display: block;
+            }
+
+            .message {
+                display: block;
+                color: black;
+            }
+
+            .time {
+                font-size: 12px;
+                color: #075e54;
+            }
+            #ahora{
+                margin-left: 60%;
+            }
+
+            #readMessageButton {
+                background-color: #25D366; /* Verde de WhatsApp */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 8px 16px;
+                font-size: 12px;
+                font-weight: bold;
+                cursor: pointer;
+                margin-top: 10px;
+                display: block;
+                align-items: center;
+                margin-left: 70%;
+            }
+
+            #readMessageButton:hover {
+                background-color: #1EBE5A; /* Un tono más oscuro de verde al pasar el ratón */
+            }
+
+            #readMessageButton:active {
+                background-color: #128C7E; /* Color de WhatsApp más oscuro al hacer clic */
+            }
+
+            #messagecartas {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                display: none;
+            }
+
+
+            #messageModal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                display: none;
+            }
+
+            /* Estilos para la "carta" */
+            #messageCard {
+                border-radius: 10px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+                width: 600px;
+                text-align: center;
+            }
+
+            /* Estilos para la "carta" */
+            #messageCard2 {
+                border-radius: 10px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+                width: 600px;
+                text-align: center;
+            }
+
+            #botonneko{
+                align-items: center;
+                display: block;
+                font-size: 20px;
+                background-color: #ee5757;
+                margin: 20px;
+                border-radius: 10px;
+                border: none;
+                margin-left: 45.5%;
+                padding: 10px;
+            }
+
+            #botoncarta {
+                margin: 0 10px;
+                padding: 8px 16px;
+                font-size: 16px;
+                border-radius: 10px;
+                background-color: #7d2dc9;
+                border: none;
+                color: white;
+            }
+
+            #botoncarta:hover {
+                background-color: #6526a0; /* Un tono más oscuro de verde al pasar el ratón */
+            }
+
+            #botoncarta:active {
+                background-color: #30134b; /* Color de WhatsApp más oscuro al hacer clic */
+            }
+            .button-container {
+                margin-top: 10px;
+                display: flex;
+            }
+
+            #nekoContainer {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+        /* Media Query para pantallas pequeñas */
+        @media (max-width: 1500px) {
+
+            #quoteImage {
+                cursor: pointer;
+                width: 500px;
+                height: auto;
+                margin-left: -120px;
+            }
+            .container, #contenedorgato {
+                margin: 2%;
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
+            .name {
+                font-size: 50px;
+                letter-spacing: 5px;
+                height: 80px;
+            }
+
+            .balloon {
+                max-width: 300px;
+                min-width: 300px;
+            }
+
+            #texto {
+                font-size: 20px;
+                margin: 5%;
+            }
+
+            #fotos, #imagen3, #imagen4 {
+                width: 250px;
+                height: auto;
+                margin: 5px;
+            }
+
+            #contenedor {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            #gif, #banda {
+                width: 100%;
+            }
+
+            .quote-section {
+                padding: 10px;
+                font-size: 18px;
+            }
+            #messageCard {
+                border-radius: 10px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+                width: 50%;
+                text-align: center;
+            }
+
+            #messageCard2 {
+                border-radius: 10px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+                width: 50%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-section" id="topSection">
+    <h1>FELIZ CUMPLEAÑOS</h1>
+    <div id="liston"></div>
+    <img id="startButton" src="liston.png" style="cursor: pointer;">
+</div>
+
+<div class="container" id="content">
+    <br><br><br><br><br>
+    <div class="name" id="name"></div>
+    <div id="contenedor">
+        <div id="texto">
+            <p >Es increíble cómo hoy cumples 22 años, espero que la pases bien en este dia y en los proximos, y aunque no pueda decirtelo en persona, este es mi forma de decirte:
+                <br><br>
+                <b>FELIZ CUMPLEAÑOS, ERIKA</b>
+                <br><br>
+                Se que paso tiempo desde la ultima vez que hablamos, pero fuiste una persona muy especial para mí. Aun recuerdo los momentos que pasamos juntos, que justo llegaste en un momento donde me sentia solo y sin motivaciones, desearia que no nos hubieramos dejado de hablar, y de haberte podido conocer mejor.
+                <br><br>
+                Pero es algo que no puedo cambiar y debo lidiar con ello, perdon si esto te parece tonto o simple, a veces desearia tener mas tiempo, mas dinero, poder regalarte algo mejor, pero pense que esta seria la mejor forma de poder saludarte en este dia tan especial.
+                <br><br>
+                Gracias por todo el tiempo que pude pasar contigo y la compañia que me diste, espero que la pases bien en tu cumpleaños junto a tu familia.
+                <br><br>
+                Con cariño, Daniel.</p>
+        </div>
+        <img id="fotos" src="eeeee soy sans.png">
+    </div>
+
+        <div id="contenedorgato">
+            <div class="quote-section" id="quoteSection">
+                <img id="quoteImage" style="cursor: pointer; margin-top: 20px;" src="0001.png">
+            </div>
+        </div>
+</div>
+<div>
+    <audio id="background-music" loop>
+        <source src="te quiero tanto.mp3" type="audio/mpeg"> <!-- Cambia 'love.mp3' por la ruta de tu archivo de música -->
+        Tu navegador no soporta audio HTML5.
+    </audio>
+</div>
+
+
+
+
+<script>
+
+
+    let frame = 1; // empezamos en 0001
+    const totalFrames = 20; // cantidad de imágenes
+    const imgElement = document.getElementById("quoteImage");
+
+    function updateFrame() {
+        // Formatea el número (ejemplo: 1 -> 0001)
+        const frameStr = String(frame).padStart(4, "0"); 
+        imgElement.src = `${frameStr}.png`;
+
+        frame++;
+        if (frame > totalFrames) frame = 1; // vuelve a empezar
+    }
+
+  // Cambiar cada 100ms (ajusta la velocidad como quieras)
+  setInterval(updateFrame, 100);
+
+    const colorButton = document.getElementById("botonneko");
+    let isOriginalColor = true; // Variable para alternar el color
+
+    function toggleColor() {
+        if (isOriginalColor) {
+            colorButton.style.backgroundColor = "white"; // Cambia a blanco
+        } else {
+            colorButton.style.backgroundColor = ""; // Vuelve al color original
+        }
+        isOriginalColor = !isOriginalColor; // Alterna el estado del color
+    }
+    setInterval(toggleColor, 100);
+
+    const nameText = "ERIKA";
+    const fonts = [
+        "'Courier New', Courier, monospace",
+        "'Georgia', serif",
+        "'Arial Black', Gadget, sans-serif",
+        "'Trebuchet MS', Helvetica, sans-serif",
+        "'Garamond', serif",
+        "'Impact', Charcoal, sans-serif",
+        "'Papyrus', fantasy",
+        "'Lucida Handwriting', cursive",
+        "'Algerian', sans-serif",
+        "'Chiller', fantasy",
+        "'Quicksand', sans-serif",
+        "'Pencil Script', cursive",
+        "'Rock Salt', cursive",
+        "'Julee', cursive"
+    ];
+
+    const quotes = [
+        "Extraño los sabados con nina",
+        "Siempre seras mi puchurrunguita",
+        "Cada vez que escucho the strokes me recuerda a ti",
+        "Aun recuerdo cuando por primera vez me hiciste el detalle de los anillos de papel",
+        "Siempre te uso de ejemplo en mis tareas y ejemplos",
+        "Pasear a eumi y kunimi juntos siempre fue un sueño para mi",
+        "Ojala algun dia me perdones por todo",
+        "Los apodos q me ponias nunca los podre borrar de mi cabeza",
+        "eumiii >>> kunimizzz"
+    ];
+
+    const nameContainer = document.getElementById('name');
+    
+
+
+    // Crear y mostrar cada letra con una fuente aleatoria
+    nameText.split('').forEach((letter, index) => {
+        const letterSpan = document.createElement('span');
+        letterSpan.textContent = letter;
+        letterSpan.className = 'letter';
+        letterSpan.style.fontFamily = fonts[index % fonts.length]; // Selecciona la fuente
+        nameContainer.appendChild(letterSpan);
+    });
+
+    // Función para animar el cambio de fuentes
+    function startFontAnimation() {
+        setInterval(() => {
+            const letters = document.querySelectorAll('.letter');
+            letters.forEach((letter) => {
+                letter.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)]; // Cambia la fuente
+            });
+        }, 500); // Cambia cada medio segundo
+    }
+
+
+    document.getElementById('startButton').addEventListener('click', () => {
+        const topSection = document.getElementById('topSection');
+        const content = document.getElementById('content');
+        const quoteSection = document.getElementById('quoteSection');
+
+        topSection.classList.add('hidden'); // Agregar clase para desvanecer
+        document.getElementById('background-music').play(); // Reproducir música al hacer clic
+
+        setTimeout(() => {
+            topSection.style.display = 'none'; // Ocultar la sección superior
+            content.style.display = 'block'; // Mostrar el contenido
+            quoteSection.style.display = 'block'; // Mostrar la sección de citas
+            startFontAnimation(); // Iniciar la animación de cambio de fuentes
+        }, 3000); // Esperar 3 segundos para el desvanecimiento
+
+        // Habilitar el scroll y evitar volver arriba
+        setTimeout(() => {
+            document.body.style.overflow = 'auto'; // Habilitar el scroll
+            window.scrollTo(0, window.innerHeight); // Mantener en la parte inferior
+        }, 3000); // Esperar 3 segundos para habilitar el scroll
+    });
+
+    window.onload = () => {
+        document.getElementById('background-music').pause(); // Pausar la música al cargar la página
+    };
+    document.getElementById('readMessageButton').addEventListener('click', function() {
+    document.getElementById('messageModal').style.display = 'flex';
+    });
+
+    document.getElementById('botonneko').addEventListener('click', function() {
+    document.getElementById('messagecartas').style.display = 'flex';
+    });
+
+</script>
+
+</body>
+</html>
