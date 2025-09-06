@@ -15,6 +15,40 @@
             src: url("Love\ &\ Trust.ttf") format('truetype');
         }
 
+        #messageWrapper {
+            position: relative; /* necesario para que el hotspot se posicione dentro */
+            display: inline-block;
+        }
+
+        #hotspot {
+            position: absolute;
+            top: 22%;   /* ajusta la posición vertical */
+            left: 55%; /* ajusta la posición horizontal */
+            width: 50px;  /* ancho del área clickeable */
+            height: 30px;  /* alto del área clickeable */
+            background-color: rgba(255, 0, 0, 0); /* invisible */
+            cursor: pointer;
+        }
+
+        /* Modal de la imagen extra */
+        #extraModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        #extraModal img {
+            width: 500px;
+            border-radius: 10px;
+}
+
         body, html {
             margin: 0;
             padding: 0;
@@ -332,6 +366,35 @@
         /* Media Query para pantallas pequeñas */
         @media (max-width: 1500px) {
 
+            #hotspot {
+                position: absolute;
+                top: 32%;   /* ajusta la posición vertical */
+                left: 55%; /* ajusta la posición horizontal */
+                width: 50px;  /* ancho del área clickeable */
+                height: 30px;  /* alto del área clickeable */
+                background-color: rgba(255, 0, 0, 0); /* invisible */
+                cursor: pointer;
+            }
+            #extraModal img {
+                width: 300px;
+                border-radius: 10px;
+            }
+
+            #messageModal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 180vw;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                display: none;
+                margin-left: -165px;
+            }
+
             #quoteImage {
                 cursor: pointer;
                 width: 500px;
@@ -403,7 +466,27 @@
     <img id="startButton" src="liston.png" style="cursor: pointer;">
 </div>
 
+
+
 <div class="container" id="content">
+    <div id="messageModal">
+        <img id="messageCard" src="carta1.png">
+        <div id="hotspot"></div>
+    </div>
+    <div id="extraModal">
+        <img id="extraImage" src="escaner.png">
+    </div>
+    <div id="notification">
+        <div id="icon">
+            <img src="wsp.png" alt="WhatsApp" />
+            <span class="title">WHATSAPP</span>
+            <span class="time" id="ahora">ahora</span>
+        </div>
+        <div id="content">
+            <span class="message">Daniel te ha enviado un mensaje</span>
+        </div>
+        <button id="readMessageButton">Leer mensaje</button>
+    </div>
     <br><br><br><br><br>
     <div class="name" id="name"></div>
     <div id="contenedor">
@@ -441,6 +524,22 @@
 
 <script>
 
+    document.getElementById('hotspot').addEventListener('click', () => {
+    document.getElementById('extraModal').style.display = 'flex';
+    });
+
+    // Cerrar la imagen extra si se hace click fuera
+    document.getElementById('extraModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('extraModal')) {
+            document.getElementById('extraModal').style.display = 'none';
+        }
+    });
+    // Cerrar el modal al hacer clic fuera del contenido de la carta
+    document.getElementById('messageModal').addEventListener('click', function(event) {
+        if (event.target === document.getElementById('messageModal')) {
+            document.getElementById('messageModal').style.display = 'none';
+        }
+    });
 
     let frame = 1; // empezamos en 0001
     const totalFrames = 20; // cantidad de imágenes
@@ -457,19 +556,6 @@
 
   // Cambiar cada 100ms (ajusta la velocidad como quieras)
   setInterval(updateFrame, 100);
-
-    const colorButton = document.getElementById("botonneko");
-    let isOriginalColor = true; // Variable para alternar el color
-
-    function toggleColor() {
-        if (isOriginalColor) {
-            colorButton.style.backgroundColor = "white"; // Cambia a blanco
-        } else {
-            colorButton.style.backgroundColor = ""; // Vuelve al color original
-        }
-        isOriginalColor = !isOriginalColor; // Alterna el estado del color
-    }
-    setInterval(toggleColor, 100);
 
     const nameText = "ERIKA";
     const fonts = [
@@ -557,6 +643,7 @@
     document.getElementById('botonneko').addEventListener('click', function() {
     document.getElementById('messagecartas').style.display = 'flex';
     });
+
 
 </script>
 
